@@ -3,7 +3,8 @@ from functions import (is_palindrome,
                        fibonacci, 
                        count_vowels, 
                        calculate_discount,
-                       flatten_list)
+                       flatten_list,
+                       word_frequencies)
 
 class TestIsPalindrome:
     def test_kajak(self):
@@ -87,3 +88,30 @@ class TestFlattenList:
     
     def test_multiple_nesting_levels(self):
         assert flatten_list([1, [2, [3, [4]]]]) == [1, 2, 3, 4]
+
+class TestWordFrequencies:
+    def test_to_be_or_not_to_be(self):
+        text = "To be or not to be"
+        expected = {"to": 2, "be": 2, "or": 1, "not": 1}
+        assert word_frequencies(text) == expected
+    
+    def test_hello_hello(self):
+        text = "Hello, hello!"
+        expected = {"hello": 2}
+        assert word_frequencies(text) == expected
+    
+    def test_empty_string(self):
+        assert word_frequencies("") == {}
+    
+    def test_python_case_insensitive(self):
+        text = "Python Python python"
+        expected = {"python": 3}
+        assert word_frequencies(text) == expected
+    
+    def test_polish_text_with_punctuation(self):
+        text = "Ala ma kota, a kot ma Ale."
+        result = word_frequencies(text)
+        assert "ala" in result
+        assert "kota" in result
+        assert "kot" in result
+        assert "ale" in result
