@@ -4,7 +4,8 @@ from functions import (is_palindrome,
                        count_vowels, 
                        calculate_discount,
                        flatten_list,
-                       word_frequencies)
+                       word_frequencies, 
+                       is_prime)
 
 class TestIsPalindrome:
     def test_kajak(self):
@@ -115,3 +116,25 @@ class TestWordFrequencies:
         assert "kota" in result
         assert "kot" in result
         assert "ale" in result
+
+class TestIsPrime:
+    def test_2(self):
+        assert is_prime(2) == True
+    
+    def test_3(self):
+        assert is_prime(3) == True
+    
+    def test_4(self):
+        assert is_prime(4) == False
+    
+    def test_0(self):
+        assert is_prime(0) == False
+    
+    def test_1(self):
+        assert is_prime(1) == False
+    
+    def test_97(self):
+        assert is_prime(97) == True
+    
+    def test_15(self):
+        assert is_prime(15) == False
