@@ -1,5 +1,8 @@
 import pytest 
-from functions import is_palindrome, fibonacci, count_vowels
+from functions import (is_palindrome, 
+                       fibonacci, 
+                       count_vowels, 
+                       calculate_discount)
 
 class TestIsPalindrome:
     def test_kajak(self):
@@ -49,3 +52,21 @@ class TestCountVowels:
     
     def test_polish_chars(self):
         assert count_vowels("Próba żółwia") == 4
+
+class TestCalculateDiscount:
+    def test_20_percent_discount(self):
+        assert calculate_discount(100, 0.2) == 80.0
+    
+    def test_zero_discount(self):
+        assert calculate_discount(50, 0) == 50.0
+    
+    def test_full_discount(self):
+        assert calculate_discount(200, 1) == 0.0
+    
+    def test_negative_discount(self):
+        with pytest.raises(ValueError):
+            calculate_discount(100, -0.1)
+    
+    def test_above_100_discount(self):
+        with pytest.raises(ValueError):
+            calculate_discount(100, 1.5)
