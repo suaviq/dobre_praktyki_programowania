@@ -2,7 +2,8 @@ import pytest
 from functions import (is_palindrome, 
                        fibonacci, 
                        count_vowels, 
-                       calculate_discount)
+                       calculate_discount,
+                       flatten_list)
 
 class TestIsPalindrome:
     def test_kajak(self):
@@ -70,3 +71,19 @@ class TestCalculateDiscount:
     def test_above_100_discount(self):
         with pytest.raises(ValueError):
             calculate_discount(100, 1.5)
+
+class TestFlattenList:
+    def test_simple_list(self):
+        assert flatten_list([1, 2, 3]) == [1, 2, 3]
+    
+    def test_nested_list(self):
+        assert flatten_list([1, [2, 3], [4, [5]]]) == [1, 2, 3, 4, 5]
+    
+    def test_empty_list(self):
+        assert flatten_list([]) == []
+    
+    def test_deeply_nested(self):
+        assert flatten_list([[[1]]]) == [1]
+    
+    def test_multiple_nesting_levels(self):
+        assert flatten_list([1, [2, [3, [4]]]]) == [1, 2, 3, 4]
