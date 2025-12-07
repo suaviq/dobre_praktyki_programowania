@@ -1,30 +1,41 @@
 from pydantic import BaseModel
 from typing import Optional
 
+# Movie schemas
 class MovieBase(BaseModel):
-    movieId: int
     title: str
     genres: Optional[str] = None
 
 class MovieCreate(MovieBase):
+    movieId: int
+
+class MovieUpdate(MovieBase):
     pass
 
 class Movie(MovieBase):
+    movieId: int
+    
     class Config:
         from_attributes = True
 
+# Link schemas
 class LinkBase(BaseModel):
-    movieId: int
     imdbId: Optional[str] = None
     tmdbId: Optional[str] = None
 
 class LinkCreate(LinkBase):
+    movieId: int
+
+class LinkUpdate(LinkBase):
     pass
 
 class Link(LinkBase):
+    movieId: int
+    
     class Config:
         from_attributes = True
 
+# Rating schemas
 class RatingBase(BaseModel):
     userId: int
     movieId: int
@@ -34,12 +45,19 @@ class RatingBase(BaseModel):
 class RatingCreate(RatingBase):
     pass
 
+class RatingUpdate(BaseModel):
+    userId: Optional[int] = None
+    movieId: Optional[int] = None
+    rating: Optional[float] = None
+    timestamp: Optional[int] = None
+
 class Rating(RatingBase):
     id: int
     
     class Config:
         from_attributes = True
 
+# Tag schemas
 class TagBase(BaseModel):
     userId: int
     movieId: int
@@ -48,6 +66,12 @@ class TagBase(BaseModel):
 
 class TagCreate(TagBase):
     pass
+
+class TagUpdate(BaseModel):
+    userId: Optional[int] = None
+    movieId: Optional[int] = None
+    tag: Optional[str] = None
+    timestamp: Optional[int] = None
 
 class Tag(TagBase):
     id: int

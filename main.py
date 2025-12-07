@@ -1,12 +1,15 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-import csv
-import os
 from typing import List
 
 from database import engine, get_db, Base
 from models import Movie, Link, Rating, Tag
-from schemas import Movie as MovieSchema, Link as LinkSchema, Rating as RatingSchema, Tag as TagSchema
+from schemas import (
+    Movie as MovieSchema, MovieCreate, MovieUpdate,
+    Link as LinkSchema, LinkCreate, LinkUpdate,
+    Rating as RatingSchema, RatingCreate, RatingUpdate,
+    Tag as TagSchema, TagCreate, TagUpdate
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -16,108 +19,217 @@ app = FastAPI()
 async def root():
     return {"hello": "world"}
 
-# Endpointy API
+# ==================== MOVIES ENDPOINTS ====================
+
 @app.get("/movies", response_model=List[MovieSchema])
 async def get_movies(db: Session = Depends(get_db)):
+    """GET - lista wszystkich filmów"""
     movies = db.query(Movie).all()
     return movies
 
+@app.get("/movies/{movie_id}", response_model=MovieSchema)
+async def get_movie(movie_id: int, db: Session = Depends(get_db)):
+    """GET - pojedynczy film po ID"""
+    movie = db.query(Movie).filter(Movie.movieId == movie_id).first()
+    if movie is None:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    return movie
+
+@app.post("/movies", response_model=MovieSchema, status_code=status.HTTP_201_CREATED)
+async def create_movie(movie: MovieCreate, db: Session = Depends(get_db)):
+    """POST - tworzenie nowego filmu"""
+    existing = db.query(Movie).filter(Movie.movieId == movie.movieId).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Movie with this ID already exists")
+    
+    db_movie = Movie(**movie.model_dump())
+    db.add(db_movie)
+    db.commit()
+    db.refresh(db_movie)
+    return db_movie
+
+@app.put("/movies/{movie_id}", response_model=MovieSchema)
+async def update_movie(movie_id: int, movie: MovieUpdate, db: Session = Depends(get_db)):
+    """PUT - aktualizacja filmu"""
+    db_movie = db.query(Movie).filter(Movie.movieId == movie_id).first()
+    if db_movie is None:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    
+    update_data = movie.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_movie, key, value)
+    
+    db.commit()
+    db.refresh(db_movie)
+    return db_movie
+
+@app.delete("/movies/{movie_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_movie(movie_id: int, db: Session = Depends(get_db)):
+    """DELETE - usuwanie filmu"""
+    db_movie = db.query(Movie).filter(Movie.movieId == movie_id).first()
+    if db_movie is None:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    
+    db.delete(db_movie)
+    db.commit()
+    return None
+
+# ==================== LINKS ENDPOINTS ====================
+
 @app.get("/links", response_model=List[LinkSchema])
 async def get_links(db: Session = Depends(get_db)):
+    """GET - lista wszystkich linków"""
     links = db.query(Link).all()
     return links
 
+@app.get("/links/{movie_id}", response_model=LinkSchema)
+async def get_link(movie_id: int, db: Session = Depends(get_db)):
+    """GET - pojedynczy link po movie_id"""
+    link = db.query(Link).filter(Link.movieId == movie_id).first()
+    if link is None:
+        raise HTTPException(status_code=404, detail="Link not found")
+    return link
+
+@app.post("/links", response_model=LinkSchema, status_code=status.HTTP_201_CREATED)
+async def create_link(link: LinkCreate, db: Session = Depends(get_db)):
+    """POST - tworzenie nowego linku"""
+    existing = db.query(Link).filter(Link.movieId == link.movieId).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Link for this movie already exists")
+    
+    db_link = Link(**link.model_dump())
+    db.add(db_link)
+    db.commit()
+    db.refresh(db_link)
+    return db_link
+
+@app.put("/links/{movie_id}", response_model=LinkSchema)
+async def update_link(movie_id: int, link: LinkUpdate, db: Session = Depends(get_db)):
+    """PUT - aktualizacja linku"""
+    db_link = db.query(Link).filter(Link.movieId == movie_id).first()
+    if db_link is None:
+        raise HTTPException(status_code=404, detail="Link not found")
+    
+    update_data = link.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_link, key, value)
+    
+    db.commit()
+    db.refresh(db_link)
+    return db_link
+
+@app.delete("/links/{movie_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_link(movie_id: int, db: Session = Depends(get_db)):
+    """DELETE - usuwanie linku"""
+    db_link = db.query(Link).filter(Link.movieId == movie_id).first()
+    if db_link is None:
+        raise HTTPException(status_code=404, detail="Link not found")
+    
+    db.delete(db_link)
+    db.commit()
+    return None
+
+# ==================== RATINGS ENDPOINTS ====================
+
 @app.get("/ratings", response_model=List[RatingSchema])
 async def get_ratings(db: Session = Depends(get_db)):
+    """GET - lista wszystkich ocen"""
     ratings = db.query(Rating).all()
     return ratings
 
+@app.get("/ratings/{rating_id}", response_model=RatingSchema)
+async def get_rating(rating_id: int, db: Session = Depends(get_db)):
+    """GET - pojedyncza ocena po ID"""
+    rating = db.query(Rating).filter(Rating.id == rating_id).first()
+    if rating is None:
+        raise HTTPException(status_code=404, detail="Rating not found")
+    return rating
+
+@app.post("/ratings", response_model=RatingSchema, status_code=status.HTTP_201_CREATED)
+async def create_rating(rating: RatingCreate, db: Session = Depends(get_db)):
+    """POST - tworzenie nowej oceny"""
+    db_rating = Rating(**rating.model_dump())
+    db.add(db_rating)
+    db.commit()
+    db.refresh(db_rating)
+    return db_rating
+
+@app.put("/ratings/{rating_id}", response_model=RatingSchema)
+async def update_rating(rating_id: int, rating: RatingUpdate, db: Session = Depends(get_db)):
+    """PUT - aktualizacja oceny"""
+    db_rating = db.query(Rating).filter(Rating.id == rating_id).first()
+    if db_rating is None:
+        raise HTTPException(status_code=404, detail="Rating not found")
+    
+    update_data = rating.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_rating, key, value)
+    
+    db.commit()
+    db.refresh(db_rating)
+    return db_rating
+
+@app.delete("/ratings/{rating_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_rating(rating_id: int, db: Session = Depends(get_db)):
+    """DELETE - usuwanie oceny"""
+    db_rating = db.query(Rating).filter(Rating.id == rating_id).first()
+    if db_rating is None:
+        raise HTTPException(status_code=404, detail="Rating not found")
+    
+    db.delete(db_rating)
+    db.commit()
+    return None
+
+# ==================== TAGS ENDPOINTS ====================
+
 @app.get("/tags", response_model=List[TagSchema])
 async def get_tags(db: Session = Depends(get_db)):
+    """GET - lista wszystkich tagów"""
     tags = db.query(Tag).all()
     return tags
 
-def load_data_from_csv():
-    db = next(get_db())
-    try:
-        if db.query(Movie).count() > 0:
-            print("Dane już zostały załadowane do bazy.")
-            return
-        
-        print("Ładowanie danych z plików CSV do bazy...")
-        
-        if os.path.exists('data/movies.csv'):
-            with open('data/movies.csv', 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    movie = Movie(
-                        movieId=int(row['movieId']),
-                        title=row['title'],
-                        genres=row['genres']
-                    )
-                    db.add(movie)
-            db.commit()
-            print("Filmy załadowane")
-        
-        if os.path.exists('data/links.csv'):
-            with open('data/links.csv', 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    link = Link(
-                        movieId=int(row['movieId']),
-                        imdbId=row['imdbId'],
-                        tmdbId=row['tmdbId'] if row['tmdbId'] else None
-                    )
-                    db.add(link)
-            db.commit()
-            print("Linki załadowane")
-        
-        if os.path.exists('data/ratings.csv'):
-            with open('data/ratings.csv', 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                for i, row in enumerate(reader):
-                    rating = Rating(
-                        userId=int(row['userId']),
-                        movieId=int(row['movieId']),
-                        rating=float(row['rating']),
-                        timestamp=int(row['timestamp']) if row['timestamp'] else None
-                    )
-                    db.add(rating)
-                    if i % 1000 == 0:
-                        db.commit()
-            db.commit()
-            print("Oceny załadowane")
-        
-        if os.path.exists('data/tags.csv'):
-            with open('data/tags.csv', 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    tag = Tag(
-                        userId=int(row['userId']),
-                        movieId=int(row['movieId']),
-                        tag=row['tag'],
-                        timestamp=int(row['timestamp']) if row['timestamp'] else None
-                    )
-                    db.add(tag)
-            db.commit()
-            print("Tagi załadowane")
-            
-        print("Wszystkie dane zostały załadowane do bazy!")
-        
-    except Exception as e:
-        db.rollback()
-        print(f"Błąd podczas ładowania danych: {e}")
-    finally:
-        db.close()
+@app.get("/tags/{tag_id}", response_model=TagSchema)
+async def get_tag(tag_id: int, db: Session = Depends(get_db)):
+    """GET - pojedynczy tag po ID"""
+    tag = db.query(Tag).filter(Tag.id == tag_id).first()
+    if tag is None:
+        raise HTTPException(status_code=404, detail="Tag not found")
+    return tag
 
-@app.post("/load-data")
-async def load_data():
-    load_data_from_csv()
-    return {"message": "Dane załadowane do bazy"}
+@app.post("/tags", response_model=TagSchema, status_code=status.HTTP_201_CREATED)
+async def create_tag(tag: TagCreate, db: Session = Depends(get_db)):
+    """POST - tworzenie nowego tagu"""
+    db_tag = Tag(**tag.model_dump())
+    db.add(db_tag)
+    db.commit()
+    db.refresh(db_tag)
+    return db_tag
 
-@app.on_event("startup")
-async def startup_event():
-    load_data_from_csv()
+@app.put("/tags/{tag_id}", response_model=TagSchema)
+async def update_tag(tag_id: int, tag: TagUpdate, db: Session = Depends(get_db)):
+    """PUT - aktualizacja tagu"""
+    db_tag = db.query(Tag).filter(Tag.id == tag_id).first()
+    if db_tag is None:
+        raise HTTPException(status_code=404, detail="Tag not found")
+    
+    update_data = tag.model_dump(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_tag, key, value)
+    
+    db.commit()
+    db.refresh(db_tag)
+    return db_tag
+
+@app.delete("/tags/{tag_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_tag(tag_id: int, db: Session = Depends(get_db)):
+    """DELETE - usuwanie tagu"""
+    db_tag = db.query(Tag).filter(Tag.id == tag_id).first()
+    if db_tag is None:
+        raise HTTPException(status_code=404, detail="Tag not found")
+    
+    db.delete(db_tag)
+    db.commit()
+    return None
 
 if __name__ == "__main__":
     import uvicorn
