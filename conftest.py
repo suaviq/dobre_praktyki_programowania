@@ -6,7 +6,8 @@ from sqlalchemy.pool import StaticPool
 
 from database import Base, get_db
 from main import app
-from models import Movie, Link, Rating, Tag
+from models import Movie, Link, Rating, Tag, User
+from auth import get_password_hash, create_access_token
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
@@ -151,3 +152,57 @@ def single_tag(db_session):
     db_session.commit()
     db_session.refresh(tag)
     return tag
+
+
+# ==================== FIXTURES DLA AUTH ====================
+
+@pytest.fixture
+def admin_user(db_session):
+    """Fixture tworzący użytkownika admin"""
+    user = User(
+        username="admin",
+        password_hash=get_password_hash("adminpass"),
+        roles="ROLE_USER,ROLE_ADMIN"
+    )
+    db_session.add(user)
+    db_session.commit()
+    db_session.refresh(user)
+    return user
+
+
+@pytest.fixture
+def regular_user(db_session):
+    """Fixture tworzący zwykłego użytkownika"""
+    user = User(
+        username="user",
+        password_hash=get_password_hash("userpass"),
+        roles="ROLE_USER"
+    )
+    db_session.add(user)
+    db_session.commit()
+    db_session.refresh(user)
+    return user
+
+
+@pytest.fixture
+def admin_token(admin_user):
+    """Token dla admina"""
+    return create_access_token(admin_user.username, ["ROLE_USER", "ROLE_ADMIN"])
+
+
+@pytest.fixture
+def user_token(regular_user):
+    """Token dla zwykłego użytkownika"""
+    return create_access_token(regular_user.username, ["ROLE_USER"])
+
+
+@pytest.fixture
+def auth_headers(user_token):
+    """Nagłówki autoryzacji dla zwykłego użytkownika"""
+    return {"Authorization": f"Bearer {user_token}"}
+
+
+@pytest.fixture
+def admin_headers(admin_token):
+    """Nagłówki autoryzacji dla admina"""
+    return {"Authorization": f"Bearer {admin_token}"}

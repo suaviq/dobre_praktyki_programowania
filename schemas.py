@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 # Movie schemas
 class MovieBase(BaseModel):
@@ -78,3 +78,35 @@ class Tag(TagBase):
     
     class Config:
         from_attributes = True
+
+# User schemas
+class UserBase(BaseModel):
+    username: str
+
+class UserCreate(UserBase):
+    password: str
+    roles: Optional[List[str]] = ["ROLE_USER"]
+
+class User(UserBase):
+    id: int
+    roles: List[str]
+    
+    class Config:
+        from_attributes = True
+
+class UserInDB(User):
+    password_hash: str
+
+# Login and Token schemas
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+class TokenPayload(BaseModel):
+    sub: str  # username
+    roles: List[str]
+    exp: int
