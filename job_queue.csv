@@ -14,96 +14,96 @@ job_id,description,status,created_at,started_at,completed_at,consumer_id
 13,Rozmowa telefoniczna #13,done,2025-12-14 14:22:11,2025-12-14 14:24:40,2025-12-14 14:25:10,2
 14,Rozmowa telefoniczna #14,done,2025-12-14 14:22:11,2025-12-14 14:24:40,2025-12-14 14:25:10,1
 15,Rozmowa telefoniczna #15,done,2025-12-14 14:22:11,2025-12-14 14:24:40,2025-12-14 14:25:10,3
-16,Rozmowa telefoniczna #16,in_progress,2025-12-14 14:22:11,2025-12-14 14:25:15,,2
-17,Rozmowa telefoniczna #17,in_progress,2025-12-14 14:22:11,2025-12-14 14:25:15,,1
-18,Rozmowa telefoniczna #18,in_progress,2025-12-14 14:22:11,2025-12-14 14:25:15,,3
-19,Rozmowa telefoniczna #19,pending,2025-12-14 14:22:11,,,
-20,Rozmowa telefoniczna #20,pending,2025-12-14 14:22:11,,,
-21,Rozmowa telefoniczna #21,pending,2025-12-14 14:22:11,,,
-22,Rozmowa telefoniczna #22,pending,2025-12-14 14:22:11,,,
-23,Rozmowa telefoniczna #23,pending,2025-12-14 14:22:11,,,
-24,Rozmowa telefoniczna #24,pending,2025-12-14 14:22:11,,,
-25,Rozmowa telefoniczna #25,pending,2025-12-14 14:22:11,,,
-26,Rozmowa telefoniczna #26,pending,2025-12-14 14:22:11,,,
-27,Rozmowa telefoniczna #27,pending,2025-12-14 14:22:11,,,
-28,Rozmowa telefoniczna #28,pending,2025-12-14 14:22:11,,,
-29,Rozmowa telefoniczna #29,pending,2025-12-14 14:22:11,,,
-30,Rozmowa telefoniczna #30,pending,2025-12-14 14:22:11,,,
-31,Rozmowa telefoniczna #31,pending,2025-12-14 14:22:11,,,
-32,Rozmowa telefoniczna #32,pending,2025-12-14 14:22:11,,,
-33,Rozmowa telefoniczna #33,pending,2025-12-14 14:22:11,,,
-34,Rozmowa telefoniczna #34,pending,2025-12-14 14:22:11,,,
-35,Rozmowa telefoniczna #35,pending,2025-12-14 14:22:11,,,
-36,Rozmowa telefoniczna #36,pending,2025-12-14 14:22:11,,,
-37,Rozmowa telefoniczna #37,pending,2025-12-14 14:22:11,,,
-38,Rozmowa telefoniczna #38,pending,2025-12-14 14:22:11,,,
-39,Rozmowa telefoniczna #39,pending,2025-12-14 14:22:11,,,
-40,Rozmowa telefoniczna #40,pending,2025-12-14 14:22:11,,,
-41,Rozmowa telefoniczna #41,pending,2025-12-14 14:22:11,,,
-42,Rozmowa telefoniczna #42,pending,2025-12-14 14:22:11,,,
-43,Rozmowa telefoniczna #43,pending,2025-12-14 14:22:11,,,
-44,Rozmowa telefoniczna #44,pending,2025-12-14 14:22:11,,,
-45,Rozmowa telefoniczna #45,pending,2025-12-14 14:22:11,,,
-46,Rozmowa telefoniczna #46,pending,2025-12-14 14:22:11,,,
-47,Rozmowa telefoniczna #47,pending,2025-12-14 14:22:11,,,
-48,Rozmowa telefoniczna #48,pending,2025-12-14 14:22:11,,,
-49,Rozmowa telefoniczna #49,pending,2025-12-14 14:22:11,,,
-50,Rozmowa telefoniczna #50,pending,2025-12-14 14:22:11,,,
-51,Rozmowa telefoniczna #51,pending,2025-12-14 14:22:11,,,
-52,Rozmowa telefoniczna #52,pending,2025-12-14 14:22:11,,,
-53,Rozmowa telefoniczna #53,pending,2025-12-14 14:22:11,,,
-54,Rozmowa telefoniczna #54,pending,2025-12-14 14:22:11,,,
-55,Rozmowa telefoniczna #55,pending,2025-12-14 14:22:11,,,
-56,Rozmowa telefoniczna #56,pending,2025-12-14 14:22:11,,,
-57,Rozmowa telefoniczna #57,pending,2025-12-14 14:22:11,,,
-58,Rozmowa telefoniczna #58,pending,2025-12-14 14:22:11,,,
-59,Rozmowa telefoniczna #59,pending,2025-12-14 14:22:11,,,
-60,Rozmowa telefoniczna #60,pending,2025-12-14 14:22:11,,,
-61,Rozmowa telefoniczna #61,pending,2025-12-14 14:22:11,,,
-62,Rozmowa telefoniczna #62,pending,2025-12-14 14:22:11,,,
-63,Rozmowa telefoniczna #63,pending,2025-12-14 14:22:11,,,
-64,Rozmowa telefoniczna #64,pending,2025-12-14 14:22:11,,,
-65,Rozmowa telefoniczna #65,pending,2025-12-14 14:22:11,,,
-66,Rozmowa telefoniczna #66,pending,2025-12-14 14:22:11,,,
-67,Rozmowa telefoniczna #67,pending,2025-12-14 14:22:11,,,
-68,Rozmowa telefoniczna #68,pending,2025-12-14 14:22:11,,,
-69,Rozmowa telefoniczna #69,pending,2025-12-14 14:22:11,,,
-70,Rozmowa telefoniczna #70,pending,2025-12-14 14:22:11,,,
-71,Rozmowa telefoniczna #71,pending,2025-12-14 14:22:11,,,
-72,Rozmowa telefoniczna #72,pending,2025-12-14 14:22:11,,,
-73,Rozmowa telefoniczna #73,pending,2025-12-14 14:22:11,,,
-74,Rozmowa telefoniczna #74,pending,2025-12-14 14:22:11,,,
-75,Rozmowa telefoniczna #75,pending,2025-12-14 14:22:11,,,
-76,Rozmowa telefoniczna #76,pending,2025-12-14 14:22:11,,,
-77,Rozmowa telefoniczna #77,pending,2025-12-14 14:22:11,,,
-78,Rozmowa telefoniczna #78,pending,2025-12-14 14:22:11,,,
-79,Rozmowa telefoniczna #79,pending,2025-12-14 14:22:11,,,
-80,Rozmowa telefoniczna #80,pending,2025-12-14 14:22:11,,,
-81,Rozmowa telefoniczna #81,pending,2025-12-14 14:22:11,,,
-82,Rozmowa telefoniczna #82,pending,2025-12-14 14:22:11,,,
-83,Rozmowa telefoniczna #83,pending,2025-12-14 14:22:11,,,
-84,Rozmowa telefoniczna #84,pending,2025-12-14 14:22:11,,,
-85,Rozmowa telefoniczna #85,pending,2025-12-14 14:22:11,,,
-86,Rozmowa telefoniczna #86,pending,2025-12-14 14:22:11,,,
-87,Rozmowa telefoniczna #87,pending,2025-12-14 14:22:11,,,
-88,Rozmowa telefoniczna #88,pending,2025-12-14 14:22:11,,,
-89,Rozmowa telefoniczna #89,pending,2025-12-14 14:22:11,,,
-90,Rozmowa telefoniczna #90,pending,2025-12-14 14:22:11,,,
-91,Rozmowa telefoniczna #91,pending,2025-12-14 14:22:11,,,
-92,Rozmowa telefoniczna #92,pending,2025-12-14 14:22:11,,,
-93,Rozmowa telefoniczna #93,pending,2025-12-14 14:22:11,,,
-94,Rozmowa telefoniczna #94,pending,2025-12-14 14:22:11,,,
-95,Rozmowa telefoniczna #95,pending,2025-12-14 14:22:11,,,
-96,Rozmowa telefoniczna #96,pending,2025-12-14 14:22:11,,,
-97,Rozmowa telefoniczna #97,pending,2025-12-14 14:22:11,,,
-98,Rozmowa telefoniczna #98,pending,2025-12-14 14:22:11,,,
-99,Rozmowa telefoniczna #99,pending,2025-12-14 14:22:11,,,
-100,Rozmowa telefoniczna #100,pending,2025-12-14 14:22:11,,,
-101,Rozmowa telefoniczna #1,pending,2025-12-14 14:22:52,,,
-102,Rozmowa telefoniczna #2,pending,2025-12-14 14:22:52,,,
-103,Rozmowa telefoniczna #3,pending,2025-12-14 14:22:52,,,
-104,Rozmowa telefoniczna #4,pending,2025-12-14 14:22:52,,,
-105,Rozmowa telefoniczna #5,pending,2025-12-14 14:22:52,,,
+16,Rozmowa telefoniczna #16,done,2025-12-14 14:22:11,2025-12-14 14:25:15,2025-12-14 14:25:45,2
+17,Rozmowa telefoniczna #17,done,2025-12-14 14:22:11,2025-12-14 14:25:15,2025-12-14 14:25:45,1
+18,Rozmowa telefoniczna #18,done,2025-12-14 14:22:11,2025-12-14 14:25:15,2025-12-14 14:25:45,3
+19,Rozmowa telefoniczna #19,done,2025-12-14 14:22:11,2025-12-14 14:25:50,2025-12-14 14:26:20,2
+20,Rozmowa telefoniczna #20,done,2025-12-14 14:22:11,2025-12-14 14:25:50,2025-12-14 14:26:20,1
+21,Rozmowa telefoniczna #21,done,2025-12-14 14:22:11,2025-12-14 14:25:50,2025-12-14 14:26:20,3
+22,Rozmowa telefoniczna #22,done,2025-12-14 14:22:11,2025-12-14 14:26:25,2025-12-14 14:32:40,2
+23,Rozmowa telefoniczna #23,done,2025-12-14 14:22:11,2025-12-14 14:26:25,2025-12-14 14:32:41,1
+24,Rozmowa telefoniczna #24,done,2025-12-14 14:22:11,2025-12-14 14:26:25,2025-12-14 14:32:41,3
+25,Rozmowa telefoniczna #25,done,2025-12-14 14:22:11,2025-12-14 14:32:45,2025-12-14 14:33:15,2
+26,Rozmowa telefoniczna #26,done,2025-12-14 14:22:11,2025-12-14 14:32:46,2025-12-14 14:33:16,1
+27,Rozmowa telefoniczna #27,done,2025-12-14 14:22:11,2025-12-14 14:32:46,2025-12-14 14:33:16,3
+28,Rozmowa telefoniczna #28,done,2025-12-14 14:22:11,2025-12-14 14:33:20,2025-12-14 14:33:50,2
+29,Rozmowa telefoniczna #29,done,2025-12-14 14:22:11,2025-12-14 14:33:21,2025-12-14 14:33:51,1
+30,Rozmowa telefoniczna #30,done,2025-12-14 14:22:11,2025-12-14 14:33:21,2025-12-14 14:33:51,3
+31,Rozmowa telefoniczna #31,done,2025-12-14 14:22:11,2025-12-14 14:33:55,2025-12-14 14:34:25,2
+32,Rozmowa telefoniczna #32,done,2025-12-14 14:22:11,2025-12-14 14:33:56,2025-12-14 14:34:26,1
+33,Rozmowa telefoniczna #33,done,2025-12-14 14:22:11,2025-12-14 14:33:56,2025-12-14 14:34:26,3
+34,Rozmowa telefoniczna #34,done,2025-12-14 14:22:11,2025-12-14 14:34:30,2025-12-14 14:35:00,2
+35,Rozmowa telefoniczna #35,done,2025-12-14 14:22:11,2025-12-14 14:34:31,2025-12-14 14:35:01,1
+36,Rozmowa telefoniczna #36,done,2025-12-14 14:22:11,2025-12-14 14:34:31,2025-12-14 14:35:01,3
+37,Rozmowa telefoniczna #37,done,2025-12-14 14:22:11,2025-12-14 14:35:05,2025-12-14 14:35:35,2
+38,Rozmowa telefoniczna #38,done,2025-12-14 14:22:11,2025-12-14 14:35:06,2025-12-14 14:35:36,1
+39,Rozmowa telefoniczna #39,done,2025-12-14 14:22:11,2025-12-14 14:35:06,2025-12-14 14:35:36,3
+40,Rozmowa telefoniczna #40,done,2025-12-14 14:22:11,2025-12-14 14:35:40,2025-12-14 14:36:10,2
+41,Rozmowa telefoniczna #41,done,2025-12-14 14:22:11,2025-12-14 14:35:41,2025-12-14 14:36:11,1
+42,Rozmowa telefoniczna #42,done,2025-12-14 14:22:11,2025-12-14 14:35:41,2025-12-14 14:36:11,3
+43,Rozmowa telefoniczna #43,done,2025-12-14 14:22:11,2025-12-14 14:36:15,2025-12-14 14:36:45,2
+44,Rozmowa telefoniczna #44,done,2025-12-14 14:22:11,2025-12-14 14:36:16,2025-12-14 14:36:46,1
+45,Rozmowa telefoniczna #45,done,2025-12-14 14:22:11,2025-12-14 14:36:16,2025-12-14 14:36:46,3
+46,Rozmowa telefoniczna #46,done,2025-12-14 14:22:11,2025-12-14 14:36:50,2025-12-14 14:37:21,2
+47,Rozmowa telefoniczna #47,done,2025-12-14 14:22:11,2025-12-14 14:36:51,2025-12-14 14:37:21,1
+48,Rozmowa telefoniczna #48,done,2025-12-14 14:22:11,2025-12-14 14:36:51,2025-12-14 14:37:21,3
+49,Rozmowa telefoniczna #49,done,2025-12-14 14:22:11,2025-12-14 14:37:26,2025-12-14 14:37:56,2
+50,Rozmowa telefoniczna #50,done,2025-12-14 14:22:11,2025-12-14 14:37:26,2025-12-14 14:37:56,1
+51,Rozmowa telefoniczna #51,done,2025-12-14 14:22:11,2025-12-14 14:37:26,2025-12-14 14:37:56,3
+52,Rozmowa telefoniczna #52,done,2025-12-14 14:22:11,2025-12-14 14:38:01,2025-12-14 14:38:31,2
+53,Rozmowa telefoniczna #53,done,2025-12-14 14:22:11,2025-12-14 14:38:01,2025-12-14 14:38:31,1
+54,Rozmowa telefoniczna #54,done,2025-12-14 14:22:11,2025-12-14 14:38:01,2025-12-14 14:38:31,3
+55,Rozmowa telefoniczna #55,done,2025-12-14 14:22:11,2025-12-14 14:38:36,2025-12-14 14:39:11,2
+56,Rozmowa telefoniczna #56,done,2025-12-14 14:22:11,2025-12-14 14:38:36,2025-12-14 14:39:12,1
+57,Rozmowa telefoniczna #57,done,2025-12-14 14:22:11,2025-12-14 14:38:36,2025-12-14 14:39:12,3
+58,Rozmowa telefoniczna #58,done,2025-12-14 14:22:11,2025-12-14 14:39:16,2025-12-14 14:39:46,2
+59,Rozmowa telefoniczna #59,done,2025-12-14 14:22:11,2025-12-14 14:39:17,2025-12-14 14:39:47,3
+60,Rozmowa telefoniczna #60,done,2025-12-14 14:22:11,2025-12-14 14:39:17,2025-12-14 14:39:47,1
+61,Rozmowa telefoniczna #61,done,2025-12-14 14:22:11,2025-12-14 14:39:51,2025-12-14 14:40:21,2
+62,Rozmowa telefoniczna #62,done,2025-12-14 14:22:11,2025-12-14 14:39:52,2025-12-14 14:40:22,3
+63,Rozmowa telefoniczna #63,done,2025-12-14 14:22:11,2025-12-14 14:39:52,2025-12-14 14:40:22,1
+64,Rozmowa telefoniczna #64,done,2025-12-14 14:22:11,2025-12-14 14:40:26,2025-12-14 14:40:56,2
+65,Rozmowa telefoniczna #65,done,2025-12-14 14:22:11,2025-12-14 14:40:27,2025-12-14 14:40:57,3
+66,Rozmowa telefoniczna #66,done,2025-12-14 14:22:11,2025-12-14 14:40:27,2025-12-14 14:40:57,1
+67,Rozmowa telefoniczna #67,done,2025-12-14 14:22:11,2025-12-14 14:41:01,2025-12-14 14:41:31,2
+68,Rozmowa telefoniczna #68,done,2025-12-14 14:22:11,2025-12-14 14:41:02,2025-12-14 14:41:32,3
+69,Rozmowa telefoniczna #69,done,2025-12-14 14:22:11,2025-12-14 14:41:02,2025-12-14 14:41:32,1
+70,Rozmowa telefoniczna #70,done,2025-12-14 14:22:11,2025-12-14 14:41:36,2025-12-14 14:42:06,2
+71,Rozmowa telefoniczna #71,done,2025-12-14 14:22:11,2025-12-14 14:41:37,2025-12-14 14:42:07,3
+72,Rozmowa telefoniczna #72,done,2025-12-14 14:22:11,2025-12-14 14:41:37,2025-12-14 14:42:07,1
+73,Rozmowa telefoniczna #73,done,2025-12-14 14:22:11,2025-12-14 14:42:11,2025-12-14 14:42:41,2
+74,Rozmowa telefoniczna #74,done,2025-12-14 14:22:11,2025-12-14 14:42:12,2025-12-14 14:42:43,3
+75,Rozmowa telefoniczna #75,done,2025-12-14 14:22:11,2025-12-14 14:42:12,2025-12-14 14:42:43,1
+76,Rozmowa telefoniczna #76,done,2025-12-14 14:22:11,2025-12-14 14:42:47,2025-12-14 14:43:17,2
+77,Rozmowa telefoniczna #77,done,2025-12-14 14:22:11,2025-12-14 14:42:48,2025-12-14 14:43:18,3
+78,Rozmowa telefoniczna #78,done,2025-12-14 14:22:11,2025-12-14 14:42:48,2025-12-14 14:43:18,1
+79,Rozmowa telefoniczna #79,done,2025-12-14 14:22:11,2025-12-14 14:43:22,2025-12-14 14:43:52,2
+80,Rozmowa telefoniczna #80,done,2025-12-14 14:22:11,2025-12-14 14:43:23,2025-12-14 14:43:53,3
+81,Rozmowa telefoniczna #81,done,2025-12-14 14:22:11,2025-12-14 14:43:23,2025-12-14 14:43:53,1
+82,Rozmowa telefoniczna #82,done,2025-12-14 14:22:11,2025-12-14 14:43:57,2025-12-14 14:44:27,2
+83,Rozmowa telefoniczna #83,done,2025-12-14 14:22:11,2025-12-14 14:43:58,2025-12-14 14:44:28,3
+84,Rozmowa telefoniczna #84,done,2025-12-14 14:22:11,2025-12-14 14:43:58,2025-12-14 14:44:28,1
+85,Rozmowa telefoniczna #85,done,2025-12-14 14:22:11,2025-12-14 14:44:32,2025-12-14 14:45:02,2
+86,Rozmowa telefoniczna #86,done,2025-12-14 14:22:11,2025-12-14 14:44:33,2025-12-14 14:45:03,3
+87,Rozmowa telefoniczna #87,done,2025-12-14 14:22:11,2025-12-14 14:44:33,2025-12-14 14:45:03,1
+88,Rozmowa telefoniczna #88,done,2025-12-14 14:22:11,2025-12-14 14:45:07,2025-12-14 14:45:37,2
+89,Rozmowa telefoniczna #89,done,2025-12-14 14:22:11,2025-12-14 14:45:08,2025-12-14 14:45:38,3
+90,Rozmowa telefoniczna #90,done,2025-12-14 14:22:11,2025-12-14 14:45:08,2025-12-14 14:45:38,1
+91,Rozmowa telefoniczna #91,done,2025-12-14 14:22:11,2025-12-14 14:45:42,2025-12-14 14:46:12,2
+92,Rozmowa telefoniczna #92,done,2025-12-14 14:22:11,2025-12-14 14:45:43,2025-12-14 14:46:13,3
+93,Rozmowa telefoniczna #93,done,2025-12-14 14:22:11,2025-12-14 14:45:43,2025-12-14 14:46:13,1
+94,Rozmowa telefoniczna #94,done,2025-12-14 14:22:11,2025-12-14 14:46:17,2025-12-14 14:46:47,2
+95,Rozmowa telefoniczna #95,done,2025-12-14 14:22:11,2025-12-14 14:46:18,2025-12-14 14:46:48,3
+96,Rozmowa telefoniczna #96,done,2025-12-14 14:22:11,2025-12-14 14:46:18,2025-12-14 14:46:48,1
+97,Rozmowa telefoniczna #97,done,2025-12-14 14:22:11,2025-12-14 14:46:52,2025-12-14 14:47:22,2
+98,Rozmowa telefoniczna #98,done,2025-12-14 14:22:11,2025-12-14 14:46:53,2025-12-14 14:47:23,3
+99,Rozmowa telefoniczna #99,done,2025-12-14 14:22:11,2025-12-14 14:46:53,2025-12-14 14:47:23,1
+100,Rozmowa telefoniczna #100,done,2025-12-14 14:22:11,2025-12-14 14:47:27,2025-12-14 14:47:57,2
+101,Rozmowa telefoniczna #1,done,2025-12-14 14:22:52,2025-12-14 14:47:28,2025-12-14 14:47:58,3
+102,Rozmowa telefoniczna #2,done,2025-12-14 14:22:52,2025-12-14 14:47:28,2025-12-14 14:47:58,1
+103,Rozmowa telefoniczna #3,in_progress,2025-12-14 14:22:52,2025-12-14 14:48:02,,2
+104,Rozmowa telefoniczna #4,in_progress,2025-12-14 14:22:52,2025-12-14 14:48:03,,3
+105,Rozmowa telefoniczna #5,in_progress,2025-12-14 14:22:52,2025-12-14 14:48:03,,1
 106,Rozmowa telefoniczna #6,pending,2025-12-14 14:22:52,,,
 107,Rozmowa telefoniczna #7,pending,2025-12-14 14:22:52,,,
 108,Rozmowa telefoniczna #8,pending,2025-12-14 14:22:52,,,
