@@ -1,82 +1,117 @@
-import csv
-import os
+import sqlite3
 import time
 from datetime import datetime
-import fcntl
 import sys
 
-QUEUE_FILE = "job_queue.csv"
+DB_FILE = "job_queue.db"
 CHECK_INTERVAL = 5
 JOB_DURATION = 30
-LOCK_TIMEOUT = 10
 
-def acquire_file_lock(file_handle):
-    start_time = time.time()
-    while True:
-        try:
-            fcntl.flock(file_handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            return True
-        except IOError:
-            if time.time() - start_time > LOCK_TIMEOUT:
-                return False
-            time.sleep(0.1)
-
-def release_file_lock(file_handle):
-    fcntl.flock(file_handle, fcntl.LOCK_UN)
+def initialize_database():
+    """Tworzy bazę danych i tabelę jeśli nie istnieją"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS jobs (
+            job_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            description TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'pending',
+            created_at TEXT NOT NULL,
+            started_at TEXT,
+            completed_at TEXT,
+            consumer_id INTEGER
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
 
 def read_jobs():
-    if not os.path.exists(QUEUE_FILE):
-        return []
+    """Odczytuje wszystkie zadania z bazy danych"""
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
     
-    with open(QUEUE_FILE, 'r', newline='') as f:
-        if not acquire_file_lock(f):
-            return []
-        reader = csv.DictReader(f)
-        jobs = list(reader)
-        release_file_lock(f)
+    cursor.execute('SELECT * FROM jobs')
+    jobs = [dict(row) for row in cursor.fetchall()]
     
+    conn.close()
     return jobs
 
-def write_jobs(jobs):
-    with open(QUEUE_FILE, 'w', newline='') as f:
-        if not acquire_file_lock(f):
-            return False
-        
-        fieldnames = ['job_id', 'description', 'status', 'created_at', 'started_at', 'completed_at', 'consumer_id']
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(jobs)
-        
-        release_file_lock(f)
-    
-    return True
-
 def find_and_claim_job(consumer_id):
-    jobs = read_jobs()
+    """Znajduje i przypisuje zadanie do konsumenta (atomowa operacja)"""
+    conn = sqlite3.connect(DB_FILE)
+    conn.isolation_level = 'EXCLUSIVE'  # Blokada całej bazy dla atomowości
+    cursor = conn.cursor()
     
-    for job in jobs:
-        if job['status'] == 'pending':
-            job['status'] = 'in_progress'
-            job['started_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            job['consumer_id'] = str(consumer_id)
+    try:
+        conn.execute('BEGIN EXCLUSIVE')
+        
+        # Znajdź pierwsze zadanie oczekujące
+        cursor.execute('''
+            SELECT * FROM jobs 
+            WHERE status = 'pending' 
+            ORDER BY job_id 
+            LIMIT 1
+        ''')
+        
+        row = cursor.fetchone()
+        
+        if row:
+            job_id = row[0]
             
-            if write_jobs(jobs):
-                return job
-            else:
-                return None
-    
-    return None
+            # Aktualizuj status zadania
+            cursor.execute('''
+                UPDATE jobs 
+                SET status = 'in_progress',
+                    started_at = ?,
+                    consumer_id = ?
+                WHERE job_id = ?
+            ''', (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), consumer_id, job_id))
+            
+            conn.commit()
+            
+            # Pobierz zaktualizowane zadanie
+            cursor.execute('SELECT * FROM jobs WHERE job_id = ?', (job_id,))
+            updated_row = cursor.fetchone()
+            
+            job = {
+                'job_id': updated_row[0],
+                'description': updated_row[1],
+                'status': updated_row[2],
+                'created_at': updated_row[3],
+                'started_at': updated_row[4],
+                'completed_at': updated_row[5],
+                'consumer_id': updated_row[6]
+            }
+            
+            return job
+        else:
+            conn.commit()
+            return None
+            
+    except sqlite3.Error as e:
+        conn.rollback()
+        print(f"Błąd bazy danych: {e}")
+        return None
+    finally:
+        conn.close()
 
 def complete_job(job_id, consumer_id):
-    jobs = read_jobs()
+    """Oznacza zadanie jako ukończone"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
     
-    for job in jobs:
-        if job['job_id'] == job_id and job['consumer_id'] == str(consumer_id):
-            job['status'] = 'done'
-            job['completed_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            break
+    cursor.execute('''
+        UPDATE jobs 
+        SET status = 'done',
+            completed_at = ?
+        WHERE job_id = ? AND consumer_id = ?
+    ''', (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), job_id, consumer_id))
     
-    write_jobs(jobs)
+    conn.commit()
+    conn.close()
 
 def execute_job(job, consumer_id):
     job_id = job['job_id']
@@ -94,12 +129,23 @@ def execute_job(job, consumer_id):
     print(f"[Consumer {consumer_id}] Ukonczono: Zadanie #{job_id}\n")
 
 def get_queue_stats():
-    jobs = read_jobs()
+    """Pobiera statystyki kolejki z bazy danych"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
     
-    pending = sum(1 for job in jobs if job['status'] == 'pending')
-    in_progress = sum(1 for job in jobs if job['status'] == 'in_progress')
-    done = sum(1 for job in jobs if job['status'] == 'done')
-    total = len(jobs)
+    cursor.execute('SELECT COUNT(*) FROM jobs WHERE status = "pending"')
+    pending = cursor.fetchone()[0]
+    
+    cursor.execute('SELECT COUNT(*) FROM jobs WHERE status = "in_progress"')
+    in_progress = cursor.fetchone()[0]
+    
+    cursor.execute('SELECT COUNT(*) FROM jobs WHERE status = "done"')
+    done = cursor.fetchone()[0]
+    
+    cursor.execute('SELECT COUNT(*) FROM jobs')
+    total = cursor.fetchone()[0]
+    
+    conn.close()
     
     return {
         'pending': pending,
@@ -109,12 +155,14 @@ def get_queue_stats():
     }
 
 def run_consumer(consumer_id):
+    initialize_database()
+    
     print("=" * 60)
     print(f"CONSUMER #{consumer_id} - Uruchomiony")
     print("=" * 60)
     print(f"Sprawdzanie kolejki co {CHECK_INTERVAL}s")
     print(f"Czas wykonania zadania: {JOB_DURATION}s")
-    print(f"Plik kolejki: {QUEUE_FILE}")
+    print(f"Baza danych: {DB_FILE}")  # Zmieniono komunikat
     print("=" * 60)
     print()
     
